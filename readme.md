@@ -49,7 +49,7 @@ After installation, create the database:
 Open **psql** or **pgAdmin**:
 
 ```sql
-CREATE DATABASE blogdb;
+CREATE DATABASE react_node_blog;
 ```
 
 ---
