@@ -39,7 +39,13 @@ exports.getById = async (req, res) => {
       include: [
         { model: User, as: 'author', attributes: ['id', 'name'] },
         { model: PostImage, as: 'images', attributes: ['url'] },
-        { model: Comment, as: 'comments', include: [{ model: User, as: 'user', attributes: ['id', 'name'] }] },
+        { 
+          model: Comment, 
+          as: 'comments',
+          separate: true,
+          include: [{ model: User, as: 'user', attributes: ['id', 'name'] }],
+          order: [['created_at', 'DESC']] // <- newest first
+        },
         { model: Like, as: 'likes', attributes: ['id', 'user_id'] }
       ]
     });

@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Posts',
     timestamps: true,
     underscored: true,
+    createdAt: 'created_at',   // explicitly map timestamps
+    updatedAt: 'updated_at',
+    freezeTableName: true,     // prevent pluralizing table name
   });
 
   Post.associate = (models) => {
