@@ -71,13 +71,19 @@ exports.getMyPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
       where: { user_id: req.user.id },
-      include: [{ model: PostImage, as: 'images' }, { model: Like, as: 'likes' }, { model: Comment, as: 'comments' }],
+      include: [
+        { model: User, as: 'author', attributes: ['id', 'name'] },
+        { model: PostImage, as: 'images' }, 
+        { model: Like, as: 'likes' }, 
+        { model: Comment, as: 'comments' }],
       order: [['created_at', 'DESC']]
     });
     const formatted = posts.map(p => ({
       id: p.id,
       title: p.title,
       description: p.description,
+      created_at: p.created_at,
+      author: p.author,
       images: p.images.map(i => i.url),
       likes: p.likes,
       comments: p.comments
